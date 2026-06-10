@@ -42,5 +42,5 @@ This project demonstrates proficiency across a wide spectrum of relational datab
 ├── Data/
 │   └── README.md              # Documentation linking to raw Kaggle datasets
 ├── Scripts/
-│   └── olist_analysis_queries.sql  # Complete compilation of production T-SQL scripts
+│   └── SQL Data Analysis Project eCommerce Site.sql  # Complete compilation of production T-SQL scripts
 └── README.md                  # Executive summary and technical documentation
