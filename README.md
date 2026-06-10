@@ -77,3 +77,22 @@ ORDER BY
 | cama_mesa_banho       | 171322.72     | 1897         | 3.81      | 298                  | 951                  |
 | beleza_saude          | 164494.91     | 1403         | 4.18      | 142                  | 872                  |
 | esporte_lazer         | 154977.43     | 1349         | 4.02      | 182                  | 782                  |        
+
+
+This query utilizes a T-SQL Window Function (AVG(...) OVER()) to calculate historical monthly benchmarks, dynamically matching them against individual orders to flag shipments that performed worse than the monthly average.
+
+```sql
+SELECT order_id, order_year, order_month, date_diff, avg_month_diff
+FROM (
+    SELECT
+        order_id,
+        YEAR(CAST(order_purchase_timestamp AS datetime)) AS order_year,
+        MONTH(CAST(order_purchase_timestamp AS datetime)) AS order_month,
+        DATEDIFF(day, CAST(order_delivered_customer_date AS datetime), CAST(order_estimated_delivery_date AS datetime)) AS date_diff,
+        AVG(CAST(DATEDIFF(day, CAST(order_delivered_customer_date AS datetime), CAST(order_estimated_delivery_date AS datetime)) AS float)) 
+            OVER (PARTITION BY YEAR(order_purchase_timestamp), MONTH(order_purchase_timestamp)) AS avg_month_diff
+    FROM olist_orders_dataset$
+    WHERE order_status = 'delivered' AND order_delivered_customer_date <> ''
+) s
+WHERE date_diff < avg_month_diff
+ORDER BY order_year, order_month;
