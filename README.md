@@ -94,5 +94,14 @@ FROM (
     FROM olist_orders_dataset$
     WHERE order_status = 'delivered' AND order_delivered_customer_date <> ''
 ) s
+
+#### Target Output Grid:
+
+| order_id | order_year | order_month | date_diff (Order Speed) | avg_month_diff (Monthly Mean) |
+| :--- | :---: | :---: | ---: | ---: |
+| 0d9664d8da1dc4337269071b39e19423 | 2016 | 10 | 34 | 36.14 |
+| ca3b8093576a51bea61c9782c7771f62 | 2016 | 10 | 32 | 36.14 |
+| 38c5c2886f2aab75bb1ae3f79a3f300d | 2016 | 10 | 35 | 36.14 |
+| 2631dba338efbcea9c3ace77ce210c01 | 2016 | 10 | 25 | 36.14 |
 WHERE date_diff < avg_month_diff
 ORDER BY order_year, order_month;
