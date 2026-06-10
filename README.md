@@ -44,3 +44,29 @@ This project demonstrates proficiency across a wide spectrum of relational datab
 ├── Scripts/
 │   └── SQL Data Analysis Project eCommerce Site.sql  # Complete compilation of production T-SQL scripts
 └── README.md                  # Executive summary and technical documentation
+
+---
+
+## 📈 Key Query Samples & Target Outputs
+
+Here are a few high-impact analysis scripts from the project along with sample outputs demonstrating the database schema capabilities.
+
+### 1. Advanced Product Performance & Sentiment Matrix
+This script compiles total revenues and order volumes per category while simultaneously mapping the exact breakdown of customer review scores (1 to 5 stars) to identify quality issues.
+
+```sql
+SELECT
+    pd.product_category_name,
+    SUM(oid.price) AS Total_Revenue,
+    COUNT(oid.order_id) AS Total_Orders,
+    AVG(ord.review_score) AS Avg_Score,
+    COUNT(CASE WHEN ord.review_score = 1 THEN 1 END) AS Total_1_Star_Reviews,
+    COUNT(CASE WHEN ord.review_score = 5 THEN 1 END) AS Total_5_Star_Reviews
+FROM
+    olist_order_items_dataset$ oid
+JOIN olist_products_dataset$ pd ON oid.product_id = pd.product_id
+JOIN olist_order_reviews_dataset$ ord ON oid.order_id = ord.order_id
+GROUP BY
+    pd.product_category_name
+ORDER BY
+    Total_Revenue DESC;
