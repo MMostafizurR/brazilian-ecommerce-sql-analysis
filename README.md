@@ -72,8 +72,8 @@ ORDER BY
     Total_Revenue DESC;
 
 | product_category_name | Total_Revenue | Total_Orders | Avg_Score | Total_1_Star_Reviews | Total_5_Star_Reviews |
-| :--- | ---: | ---: | ---: | ---: | ---: |
-| relogios_presentes | 210880.14 | 1144 | 4.07 | 103 | 624 |
-| cama_mesa_banho   | 171322.72 | 1897 | 3.81 | 298 | 951 |
-| beleza_saude       | 164494.91 | 1403 | 4.18 | 142 | 872 |
-| esporte_lazer      | 154977.43 | 1349 | 4.02 | 182 | 782 |
+| :---                  | ---:          | ---:         | ---:      | ---:                 | ---:                 |
+| relogios_presentes    | 210880.14     | 1144         | 4.07      | 103                  | 624                  |
+| cama_mesa_banho       | 171322.72     | 1897         | 3.81      | 298                  | 951                  |
+| beleza_saude          | 164494.91     | 1403         | 4.18      | 142                  | 872                  |
+| esporte_lazer         | 154977.43     | 1349         | 4.02      | 182                  | 782                  |        
